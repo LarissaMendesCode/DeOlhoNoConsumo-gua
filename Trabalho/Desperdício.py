@@ -5,9 +5,10 @@ print("-"*50)
 print (" Bem-vindo à Calculdora Sustentável!")
 print("-"*50)
 
-
+desperdicio_total_m3=0
 
 def cadastrar():
+  global desperdicio_total_m3
   print("-"*50)
   usuarios = str(input("Informe o seu nome: "))
   print("-"*50)
@@ -42,22 +43,22 @@ def cadastrar():
   print("-"*50)
   if arejador==1:
     torneira_consumolavarmaos=tempo_torneira_maos*qtdeusotorneiramaos*0.15*60
-    print ("lavar as mãos",torneira_consumolavarmaos)
+    #print ("lavar as mãos",torneira_consumolavarmaos)
     torneira_consumodentes=tempo_torneira_escovardentes*qtdeusotorneiradentes*0.15*60
-    print ("escovar os dentes",torneira_consumodentes)
+    #print ("escovar os dentes",torneira_consumodentes)
     torneira_consumolouca=tempo_torneira_lavarlouça*qtdeusotorneiralouça*0.15*60
-    print ("lavar louça",torneira_consumolouca)
+    #print ("lavar louça",torneira_consumolouca)
     torneira_consumo= torneira_consumolavarmaos+torneira_consumodentes+torneira_consumolouca
-    print (torneira_consumo)
+    #print (torneira_consumo)
   if arejador==2: 
     torneira_consumolavarmaos=tempo_torneira_maos*qtdeusotorneiramaos*0.30*60
-    print ("lavar as mãos",torneira_consumolavarmaos)
+    #print ("lavar as mãos",torneira_consumolavarmaos)
     torneira_consumodentes=tempo_torneira_escovardentes*qtdeusotorneiradentes*0.30*60
-    print ("escovar os dentes",torneira_consumodentes)
+    #print ("escovar os dentes",torneira_consumodentes)
     torneira_consumolouca=tempo_torneira_lavarlouça*qtdeusotorneiralouça*0.30*60
-    print ("lavar louça",torneira_consumolouca)
+    #print ("lavar louça",torneira_consumolouca)
     torneira_consumo= torneira_consumolavarmaos+torneira_consumodentes+torneira_consumolouca
-    print (torneira_consumo)
+    #print (torneira_consumo)
   else:
     print ("escolha uma opçao válida.") 
     
@@ -106,43 +107,33 @@ def cadastrar():
   else:
     economiadescarga= 30 - consumodescarga
     print ("Economia (L) Descarga: ", economiadescarga)
-    
+  
+  print("-"*50) 
   desperdiciototal= desperdicio+ desperdiciotorneira+desperdiciodescarga
   desperdicio_total_m3= (desperdiciototal/1000)*30
   print("Desperdício total individual mensal (m³)", desperdicio_total_m3)
-  volume= volume - desperdicio_total_m3
-  calcular_FATURA()
+  print("-"*50)
   
-cadastrar()
-
-     
 # Torneira com arejador 0,15 L/s e sem arejador é 0,3 L/s.
 # Torneiras com sensores que controlam a saída de água de acordo com a 
 # aproximação das mãos reduzem o consumo entre 35% e 80%, na comparação 
 # com as convencionais.
 # descarga a vácuo 1 L/descarga descarga convencional de 6 a 12 L.
+cadastrar ()
 
-opcao=int(input("Gostaria de acrescentar mais algum proprietário?: "))
-print("1.Sim")
-print("2.Não")
-
+opcao= int(input("Quer saber do resultado?Selecione o número:\n1.Sair\n2.Resultado\n"))
 if opcao==1:
-  cadastrar ()
-    
+   print("Até logo!")  
 else:
-  print ("Seu valor de consumo: ")
-  
-def calcular_FATURA():
-  #identificar a categoria
-  volume= float (input("Informe o volume m³ da sua fatura: "))
-  volume= volume - desperdicio_total_m3
+  volumeatual= float (input("Informe o volume m³ da sua fatura atual: "))
+  reais_atual= float (input("Informe o valor da sua conta atual:  "))
+  volume = float (volumeatual - desperdicio_total_m3)
+  print ("1.Residencial Social")
+  print ("2.Residencial Popular")
+  print ("3.Residencial Normal")
   esgoto = round(volume*0.8)
-
-print ("1.Residencial Social")
-print ("2.Residencial Popular")
-print ("3.Residencial Normal")
-categoria = int( input ("Informe a categoria: "))
-  
+  categoria = int( input ("Informe a categoria: "))
+  print ("Com o consumo racional de água, estima-se uma nova fatura (m³):", volume)
 #Cálculo faturamento em reais
 faixa_0_valor = 2.12
 faixa_1_valor= 4.34
@@ -268,6 +259,5 @@ print ("Total da fatura água (R$):", round(consumo_RS,2))
 print ("Total da fatura de esgoto (R$):", round(esgoto_RS,2))
 total_RS= consumo_RS+esgoto_RS
 print ("Total da fatura (água e esgoto) (R$):", round(total_RS,2))
-
-
-
+valoreconomia = reais_atual - total_RS
+print ("Total economia (R$):", round(valoreconomia,2))
