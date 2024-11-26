@@ -1,11 +1,8 @@
-
 print("-"*50)
 print("-"*50)
 print (" Bem-vindo à Calculdora Sustentável!")
 print("-"*50)
-
 desperdicio_total_m3=0
-
 def cadastrar():
   global desperdicio_total_m3
   print("-"*50)
@@ -119,7 +116,6 @@ def cadastrar():
 # com as convencionais.
 # descarga a vácuo 1 L/descarga descarga convencional de 6 a 12 L.
 cadastrar ()
-
 opcao= int(input("Quer saber do resultado?Selecione o número:\n1.Sair\n2.Resultado\n"))
 if opcao==1:
    print("Até logo!")  
@@ -140,13 +136,11 @@ faixa_2_valor= 7.38
 faixa_3_valor= 8.00
 faixa_4_valor= 13.77
 faixa_5_valor= 24.54
-
 faixa_6_valor = 6.17
 faixa_7_valor= 8.00
 faixa_8_valor= 8.65
 faixa_9_valor= 14.85
 faixa_10_valor= 26.22
-
 if categoria == 1:
     consumo_RS= volume*faixa_0_valor
   
@@ -173,7 +167,6 @@ if categoria==2:
           volume5= volume-30
         
           consumo_RS= 10*faixa_1_valor + 5*faixa_2_valor + 5*faixa_3_valor+ 5*faixa_4_valor+ volume5*faixa_5_valor
-
       
       if categoria==2:
        if esgoto <= 10:
@@ -225,7 +218,6 @@ if categoria==3:
           volume5= volume-30
         
           consumo_RS= 10*faixa_6_valor + 5*faixa_7_valor + 5*faixa_8_valor+ 5*faixa_9_valor+ volume5*faixa_10_valor
-
       
       if categoria==3:
        if esgoto <= 10:

@@ -4,177 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculadora Sustentável</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        line-height: 1.5;
-      }
-      .container {
-        max-width: 600px;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        background-color: #f9f9f9;
-      }
-      h1,
-      h2 {
-        text-align: center;
-      }
-      label {
-        display: block;
-        margin-top: 10px;
-        font-weight: bold;
-      }
-      input,
-      select {
-        width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      button {
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Calculadora Sustentável</h1>
-      <form method="POST" action="{{ url_for('resultado') }}">
-        <h2>Dados de Consumo</h2>
+    <h1>Calculadora Sustentável</h1>
+    <form method="POST" action="/calcular">
+      <h3>Chuveiro</h3>
+      <label>Tempo médio de banho (min):</label>
+      <input type="number" name="tempobanho" step="0.1" required /><br />
+      <label>Número de banhos por dia:</label>
+      <input type="number" name="qtdebanho" required /><br />
 
-        <!-- Chuveiro -->
-        <label for="tempobanho">Tempo médio de banho (min):</label>
-        <input
-          type="number"
-          id="tempobanho"
-          name="tempobanho"
-          step="0.1"
-          required
-        />
+      <h3>Torneira</h3>
+      <label>Tempo para lavar as mãos (min):</label>
+      <input type="number" name="tempo_maos" step="0.1" required /><br />
+      <label>Frequência para lavar as mãos:</label>
+      <input type="number" name="vezes_maos" required /><br />
+      <label>Tempo para escovar os dentes (min):</label>
+      <input type="number" name="tempo_dentes" step="0.1" required /><br />
+      <label>Frequência para escovar os dentes:</label>
+      <input type="number" name="vezes_dentes" required /><br />
+      <label>Tempo para lavar louça (min):</label>
+      <input type="number" name="tempo_louca" step="0.1" required /><br />
+      <label>Frequência para lavar louça:</label>
+      <input type="number" name="vezes_louca" required /><br />
+      <label>Torneira:</label>
+      <select name="arejador" required>
+        <option value="1">Com arejador</option>
+        <option value="2">Sem arejador</option></select
+      ><br />
 
-        <label for="qtdebanho">Número de banhos por dia:</label>
-        <input type="number" id="qtdebanho" name="qtdebanho" required />
+      <h3>Descarga</h3>
+      <label>Número de descargas por dia:</label>
+      <input type="number" name="qtd_descarga" required /><br />
 
-        <!-- Torneira -->
-        <h2>Torneira</h2>
-        <label for="tempo_torneira_maos"
-          >Tempo médio para lavar as mãos (min):</label
-        >
-        <input
-          type="number"
-          id="tempo_torneira_maos"
-          name="tempo_torneira_maos"
-          step="0.1"
-          required
-        />
+      <h3>Conta</h3>
+      <label>Volume atual da fatura (m³):</label>
+      <input type="number" name="volumeatual" step="0.1" required /><br />
+      <label>Valor atual da conta (R$):</label>
+      <input type="number" name="reais_atual" step="0.01" required /><br />
+      <label>Categoria:</label>
+      <select name="categoria" required>
+        <option value="1">Residencial Social</option>
+        <option value="2">Residencial Popular</option>
+        <option value="3">Residencial Normal</option></select
+      ><br />
 
-        <label for="qtdeusotorneiramaos"
-          >Frequência de lavar as mãos (vezes por dia):</label
-        >
-        <input
-          type="number"
-          id="qtdeusotorneiramaos"
-          name="qtdeusotorneiramaos"
-          required
-        />
-
-        <label for="tempo_torneira_escovardentes"
-          >Tempo médio para escovar os dentes (min):</label
-        >
-        <input
-          type="number"
-          id="tempo_torneira_escovardentes"
-          name="tempo_torneira_escovardentes"
-          step="0.1"
-          required
-        />
-
-        <label for="qtdeusotorneiradentes"
-          >Frequência de escovação (vezes por dia):</label
-        >
-        <input
-          type="number"
-          id="qtdeusotorneiradentes"
-          name="qtdeusotorneiradentes"
-          required
-        />
-
-        <label for="tempo_torneira_lavarlouça"
-          >Tempo médio para lavar louça (min):</label
-        >
-        <input
-          type="number"
-          id="tempo_torneira_lavarlouça"
-          name="tempo_torneira_lavarlouça"
-          step="0.1"
-          required
-        />
-
-        <label for="qtdeusotorneiralouça"
-          >Frequência de lavar louça (vezes por dia):</label
-        >
-        <input
-          type="number"
-          id="qtdeusotorneiralouça"
-          name="qtdeusotorneiralouça"
-          required
-        />
-
-        <label for="arejador">Torneira:</label>
-        <select id="arejador" name="arejador" required>
-          <option value="1">Com arejador</option>
-          <option value="2">Sem arejador</option>
-        </select>
-
-        <!-- Descarga -->
-        <h2>Descarga</h2>
-        <label for="qtdedescarga">Número de descargas por dia:</label>
-        <input type="number" id="qtdedescarga" name="qtdedescarga" required />
-
-        <!-- Dados da conta -->
-        <h2>Dados da Conta</h2>
-        <label for="volumeatual">Volume atual da fatura (m³):</label>
-        <input
-          type="number"
-          id="volumeatual"
-          name="volumeatual"
-          step="0.1"
-          required
-        />
-
-        <label for="reais_atual">Valor da conta atual (R$):</label>
-        <input
-          type="number"
-          id="reais_atual"
-          name="reais_atual"
-          step="0.01"
-          required
-        />
-
-        <label for="categoria">Categoria:</label>
-        <select id="categoria" name="categoria" required>
-          <option value="1">Residencial Social</option>
-          <option value="2">Residencial Popular</option>
-          <option value="3">Residencial Normal</option>
-        </select>
-
-        <button type="submit">Calcular</button>
-      </form>
-    </div>
+      <button type="submit">Calcular</button>
+    </form>
   </body>
 </html>
